@@ -1,5 +1,7 @@
 package dev.cbos.o11yc.challenge01.resource;
 
+import io.opentelemetry.instrumentation.annotations.SpanAttribute;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
 import jakarta.annotation.PostConstruct;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -68,7 +70,8 @@ public class ChallengeResource {
         }
     }
 
-    private List<Challenge> handleRequest(int id) throws InterruptedException {
+    @WithSpan("Handle request")
+    private List<Challenge> handleRequest(@SpanAttribute("id") int id) throws InterruptedException {
         Thread.sleep((long) (Math.abs((random.nextDouble() + 1.0) * 200.0))); // Simulate some heavy work
 
         if (id < 0) {
