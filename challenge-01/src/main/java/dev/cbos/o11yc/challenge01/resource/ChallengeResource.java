@@ -71,7 +71,7 @@ public class ChallengeResource {
     }
 
     @WithSpan("Handle request")
-    private List<Challenge> handleRequest(@SpanAttribute("id") int id) throws InterruptedException {
+    List<Challenge> handleRequest(@SpanAttribute("id") int id) throws InterruptedException {
         Thread.sleep((long) (Math.abs((random.nextDouble() + 1.0) * 200.0))); // Simulate some heavy work
 
         if (id < 0) {
